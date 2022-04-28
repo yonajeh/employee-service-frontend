@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {faBan, faEye, faPen } from '@fortawesome/free-solid-svg-icons';
+import {Component, OnInit} from '@angular/core';
+import {faBan, faEye, faPen} from '@fortawesome/free-solid-svg-icons';
+import {Employee} from "../data/employee";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'get-all',
@@ -11,9 +13,16 @@ export class GetAllComponent implements OnInit {
   faUpdate = faPen;
   faDelete = faBan;
 
-  constructor() { }
+
+  employees: Employee [] = [];
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
+    this.http.get<Employee []>('http://localhost:8089/employees').subscribe(
+      (data) => this.employees = data
+    )
   }
 
 }
