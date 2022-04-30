@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Employee} from "../data/employee";
+import {EmployeeService} from "../data/employee.service";
 
 @Component({
   selector: 'create',
@@ -13,7 +13,7 @@ export class CreateComponent implements OnInit {
   prenom: string = '';
   email: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
@@ -28,9 +28,9 @@ export class CreateComponent implements OnInit {
       email: this.email
     }
 
-    this.http.post('http://localhost:8089/employees', employee)
+    this.employeeService.create(employee)
       .subscribe(
-        (data) => console.log(data)
+        (data) => console.log(data),
       )
 
   }

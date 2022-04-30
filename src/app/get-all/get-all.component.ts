@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faBan, faEye, faPen} from '@fortawesome/free-solid-svg-icons';
 import {Employee} from "../data/employee";
 import {HttpClient} from "@angular/common/http";
+import {EmployeeService} from "../data/employee.service";
 
 @Component({
   selector: 'get-all',
@@ -16,11 +17,11 @@ export class GetAllComponent implements OnInit {
 
   employees: Employee [] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
-    this.http.get<Employee []>('http://localhost:8089/employees').subscribe(
+    this.employeeService.getAll().subscribe(
       (data) => this.employees = data
     )
   }
