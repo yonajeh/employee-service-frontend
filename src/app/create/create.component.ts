@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Employee} from "../data/employee";
 import {EmployeeService} from "../data/employee.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'create',
@@ -13,7 +14,9 @@ export class CreateComponent implements OnInit {
   prenom: string = '';
   email: string = '';
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -30,7 +33,10 @@ export class CreateComponent implements OnInit {
 
     this.employeeService.create(employee)
       .subscribe(
-        (data) => console.log(data),
+        (data) => {
+          console.log(data);
+          this.router.navigate(['all']);
+        },
       )
 
   }
