@@ -20,4 +20,12 @@ export class EmployeeService {
   create(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.url, employee);
   }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(this.url + '/' + id);
+  }
+
+  getOne(id: string): Observable<Employee> {
+    return this.http.get<Employee>(this.url + '/' + id);
+  }
 }
